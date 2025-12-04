@@ -237,22 +237,24 @@
 
     /* Back to profile button */
     .back-profile {
-      position: absolute;
-      bottom: 1.2rem;
-      right: 2rem;
-      width: 2rem;
-      height: 2rem;
-      background: transparent;
-      border: var(--border);
-      border-radius: 0.3rem;
-      font-size: 1.1rem;
-      color: var(--main-color);
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      transition: 0.5s;
-      cursor: pointer;
-    }
+  position: absolute;
+  top: 1.2rem;      /* ⬅️ was bottom */
+  right: 2rem;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: var(--border);
+  border-radius: 0.3rem;
+  font-size: 1.1rem;
+  color: var(--main-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  cursor: pointer;
+  color: blue;
+}
+
 
     .back-profile:hover {
       background: var(--main-color);
@@ -275,6 +277,7 @@
       transform: translateX(-50%) scale(1);
       top: -1.8rem;
     }
+ 
   </style>
 </head>
 <body>
