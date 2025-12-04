@@ -14,7 +14,7 @@
   />
 
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap");
 
     * {
       margin: 0;
@@ -46,8 +46,10 @@
       min-height: 100vh;
       background: var(--bg-color);
       color: var(--text-color);
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       gap: 1.5rem;
+      padding: 1rem;
     }
 
     /* See CV button */
@@ -61,7 +63,8 @@
       font-size: 0.95rem;
       font-weight: 500;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
+      text-align: center;
     }
 
     #seeCvBtn:hover {
@@ -77,32 +80,31 @@
       align-items: center;
       justify-content: center;
       z-index: 999;
+      padding: 1rem;
     }
 
     .cv-overlay.show {
       display: flex;
     }
 
-    /* 🔸 Bigger book size */
+    /* Responsive book size */
     .wrapper {
       position: relative;
-      width: 60rem;   /* increased */
-      height: 40rem;  /* increased */
+      width: min(60rem, 100vw - 2rem); /* max 60rem, otherwise fit width */
+      height: min(40rem, 80vh);        /* max 40rem, otherwise 80% of height */
       padding: 2rem;
       perspective: 250rem;
-      animation: show-animate 2s forwards;
+      animation: show-animate 0.8s forwards;
     }
 
     @keyframes show-animate {
-      0%,
-      30% {
+      0% {
         opacity: 0;
-        transform: rotate(-20deg);
+        transform: scale(0.9);
       }
-
       100% {
         opacity: 1;
-        transform: rotate(0deg);
+        transform: scale(1);
       }
     }
 
@@ -152,6 +154,7 @@
 
     .book .book-page.page-left {
       left: 0;
+      padding: 1.5rem 2rem;
       box-shadow: -0.6rem 0.6rem 0.6rem rgba(0, 0, 0, 0.1);
     }
 
@@ -161,14 +164,15 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      width: 100%;
+      height: 100%;
     }
 
     .profile-page img {
-      min-height: 50px;
-      min-width: 180px;
-      margin-bottom: 0.8rem;
       max-width: 100%;
-      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+      margin-bottom: 0.8rem;
     }
 
     .book-page.page-right {
@@ -201,6 +205,13 @@
 
     .book-page .page-back {
       transform: rotateY(180deg) translateZ(1px);
+    }
+
+    .book-page .page-front img,
+    .book-page .page-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .number-page {
@@ -237,24 +248,22 @@
 
     /* Back to profile button */
     .back-profile {
-  position: absolute;
-  top: 3rem;      /* ⬅️ was bottom */
-  right: 2rem;
-  width: 2rem;
-  height: 2rem;
-  background: transparent;
-  border: var(--border);
-  border-radius: 0.3rem;
-  font-size: 1.1rem;
-  color: var(--main-color);
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.5s;
-  cursor: pointer;
-  color: blue;
-}
-
+      position: absolute;
+      top: 3rem;
+      right: 2rem;
+      width: 2rem;
+      height: 2rem;
+      background: transparent;
+      border: var(--border);
+      border-radius: 0.3rem;
+      font-size: 1.1rem;
+      color: blue; /* as you set */
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.5s;
+      cursor: pointer;
+    }
 
     .back-profile:hover {
       background: var(--main-color);
@@ -267,9 +276,10 @@
       left: 50%;
       transform: translateX(-50%) scale(0.5);
       font-size: 1rem;
-       color: rgb(90, 12, 198);
+      color: rgb(90, 12, 198);
       opacity: 0;
       transition: 0.5s;
+      white-space: nowrap;
     }
 
     .back-profile:hover p {
@@ -277,12 +287,87 @@
       transform: translateX(-50%) scale(1);
       top: -1.8rem;
     }
- 
+
+    /* ============ RESPONSIVE BREAKPOINTS ============ */
+
+    /* Tablet */
+    @media (max-width: 992px) {
+      .wrapper {
+        width: min(48rem, 100vw - 1.5rem);
+        height: min(32rem, 75vh);
+        padding: 1.5rem;
+      }
+
+      .book .book-page,
+      .book .book-page.page-left,
+      .book-page .page-front,
+      .book-page .page-back {
+        padding: 1.2rem 1.4rem;
+      }
+
+      .nextprev-btn {
+        bottom: 0.7rem;
+      }
+
+      .number-page {
+        bottom: 0.9rem;
+      }
+
+      .back-profile {
+        top: 2rem;
+        right: 1.5rem;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      #seeCvBtn {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .wrapper {
+        width: 100%;
+        height: 70vh;
+        padding: 1rem;
+      }
+
+      .book .book-page,
+      .book .book-page.page-left,
+      .book-page .page-front,
+      .book-page .page-back {
+        padding: 0.8rem;
+      }
+
+      .nextprev-btn {
+        width: 1.7rem;
+        height: 1.7rem;
+        font-size: 1.1rem;
+        bottom: 0.5rem;
+      }
+
+      .number-page {
+        font-size: 0.8rem;
+        bottom: 0.7rem;
+      }
+
+      .back-profile {
+        top: 1rem;
+        right: 1rem;
+        width: 1.8rem;
+        height: 1.8rem;
+        font-size: 1rem;
+      }
+
+      .back-profile p {
+        font-size: 0.75rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Hover button -->
+  <!-- Hover / click button -->
   <button id="seeCvBtn">Urban Land Information Management Platform (Iraq)</button>
 
   <!-- Orange overlay with the book inside -->
@@ -421,13 +506,12 @@
     });
 
     const pages = document.querySelectorAll(".book-page.page-right");
-
     let totalPages = pages.length;
     let pageNumber = 0;
 
     const backProfileButton = document.querySelector(".back-profile");
 
-    // Flip all pages back to profile
+    // Flip all pages back to profile (only flipping here – you can also close modal if you want)
     backProfileButton.onclick = () => {
       pages.forEach((_, index) => {
         setTimeout(() => {
@@ -485,14 +569,19 @@
       });
     }
 
-    // Hover button -> open modal + start animation
+    // Hover / click button -> open modal + start animation
     const btn = document.getElementById("seeCvBtn");
     const overlay = document.getElementById("cvOverlay");
 
-    btn.addEventListener("mouseenter", () => {
+    function openModal() {
       overlay.classList.add("show");
       startBookAnimation();
-    });
+    }
+
+    // Desktop hover
+    btn.addEventListener("mouseenter", openModal);
+    // Mobile / click
+    btn.addEventListener("click", openModal);
 
     // Click orange background to close modal
     overlay.addEventListener("click", (e) => {
