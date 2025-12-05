@@ -90,8 +90,8 @@
     /* Responsive book size */
     .wrapper {
       position: relative;
-      width: min(60rem, 100vw - 2rem); /* max 60rem, otherwise fit width */
-      height: min(40rem, 80vh);        /* max 40rem, otherwise 80% of height */
+      width: min(60rem, 100vw - 2rem);
+      height: min(40rem, 80vh);
       padding: 2rem;
       perspective: 250rem;
       animation: show-animate 0.8s forwards;
@@ -257,7 +257,7 @@
       border: var(--border);
       border-radius: 0.3rem;
       font-size: 1.1rem;
-      color: blue; /* as you set */
+      color: blue;
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -473,6 +473,44 @@
             </span>
           </div>
         </div>
+
+        <!-- RIGHT SHEET 4 (Page 8 + ending back side) -->
+        <div class="book-page page-right turn" id="page-4">
+          <!-- Front = Page 8 -->
+          <div class="page-front">
+            <img
+              src="cvimage/Kais_Alshaar_CV_Page_8.jpg"
+              alt="CV Page 8"
+              style="width: 100%; height: 100%; object-fit: contain;"
+            />
+            <span class="number-page">8</span>
+            <span class="nextprev-btn" data-page="page-4">
+              <i class="fa-solid fa-chevron-right"></i>
+            </span>
+          </div>
+
+          <!-- Back = simple closing page (no image needed) -->
+          <div class="page-back">
+            <div
+              style="
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.3rem;
+                font-weight: 500;
+              "
+            >
+              <p>Thank you for reading</p>
+              <p style="font-size: 0.9rem; margin-top: 0.4rem;">STDM / Urban Land Information Management</p>
+            </div>
+            <span class="nextprev-btn back" data-page="page-4">
+              <i class="fa-solid fa-chevron-left"></i>
+            </span>
+          </div>
+        </div>
       </div>
 
       <!-- Back to profile button -->
@@ -511,7 +549,7 @@
 
     const backProfileButton = document.querySelector(".back-profile");
 
-    // Flip all pages back to profile (only flipping here – you can also close modal if you want)
+    // Flip all pages back to profile
     backProfileButton.onclick = () => {
       pages.forEach((_, index) => {
         setTimeout(() => {
